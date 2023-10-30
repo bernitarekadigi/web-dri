@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    scroll-behavior: smooth;
+}
+
+.bg-abu {
+    background: rgba(255, 255, 255, 0.20);
+}
+
+.back {
+    background-image: url('../../public/img/BG.svg');
+    background-repeat: no-repeat;
+}
+@media (min-width: 1920px) {
+    .back {
+        background-image: url('../../public/img/bgx2560.svg');
+        background-repeat: no-repeat;
+    }
+}
+.img-pkr {
+    background-image: url('../../public/img/mitra/pkr.png');
+}
+
+.img-baba {
+    background-image: url('../../public/img/mitra/baba.png');
+}
+
+.float-button {
+    border-radius: 48px;
+    background: var(--gradient, linear-gradient(350deg, #30328C -24.58%, #3A3ECA 55.68%));
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 93, 0.30);
+}
+
+.lamp {
+    fill: linear-gradient(284deg, rgba(48, 50, 140, 0.70) 19.48%, rgba(58, 62, 202, 0.70) 81.74%);
+    filter: blur(50px);
+}
+
+.lamp2 {
+    background: linear-gradient(284deg, #30328C 19.48%, #3A3ECA 81.74%);
+    filter: blur(150px);
+}
+
+.kotak {
+    border-left: 0.5px solid #F1F1F1;
+    background: #000013;
+}
+
+.bg-about{
+    filter: grayscale(97%) hue-rotate(340deg) brightness(4.3);
+}
+
+.bb {
+    border: solid blue !important
+}
+.bp {
+    border: solid white !important
+}
+.rr {
+    border: solid red !important
+}
+.cc{
+    border: solid chartreuse !important
+}
+.visimisi{
+    backdrop-filter: blur(90px);
+}
