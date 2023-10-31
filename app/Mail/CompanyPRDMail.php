@@ -16,9 +16,14 @@ class CompanyPRDMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $mailData;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct($mailData)
     {
-        //
+        $this->mailData = $mailData;
     }
 
     /**

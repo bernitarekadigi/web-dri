@@ -9,6 +9,8 @@ use App\Models\Feature;
 use App\Http\Requests\StorePrdRequest;
 use App\Http\Requests\UpdatePrdRequest;
 use App\Mail\CompanyPRDMail;
+use App\Models\Target;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -67,10 +69,20 @@ class PrdController extends Controller
         $detaPRD->goals             = $request->goals;
         $detaPRD->require_product   = $request->require_product;
         $detaPRD->target_users      = $request->target_users;
-        $detaPRD->deadline          = $request->deadline;
+        $detaPRD->deadline          = Carbon::parse($request->deadline);
         $detaPRD->note              = $request->note;
         $detaPRD->save();
 
+        if ($request->target[0]["target"] != null) {
+            foreach ($request->target as $ke) {
+                $fitur  = new Target();
+                $fitur->company_id  = $cpnyID;
+                $fitur->prd_id      = $prdID;
+                $fitur->target        = $ke['target'];
+                $fitur->desc        = $ke['desc'];
+                $fitur->save();
+            }
+        }
         if ($request->feature[0]["fitur"] != null) {
             foreach ($request->feature as $ke) {
                 $fitur  = new Feature();
@@ -88,8 +100,8 @@ class PrdController extends Controller
             'url' => url('/prd-detail'),
         ];
 
-        Mail::to('bernitafebri@gmail.com')->send(new CompanyPRDMail($mailData));
-        Mail::to($company->cp_email)->send(new CompanyPRDMail($mailData));
+        // Mail::to('bernitafebri@gmail.com')->send(new CompanyPRDMail($mailData));
+        Mail::to($company->cp_email)->cc('bernitafebri@gmail.com')->send(new CompanyPRDMail($mailData));
 
         return back()->with('success', 'PRD Berhasil Disimpan.');
     }
