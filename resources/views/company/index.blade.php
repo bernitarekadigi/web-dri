@@ -28,7 +28,27 @@
             @if (Session::has('success'))
                 <div class="alert alert-success text-center">
                     <p>{{ Session::get('success') }}</p>
+                    <p id="timer"></p>
+                    <p>Kembali ke <a href="/">Home</a> </p>
+
                 </div>
+
+                <script type="text/javascript">
+                    var count = 15; // Timer
+                    var redirect = "/"; // Target URL
+
+                    function countDown() {
+                        var timer = document.getElementById("timer"); // Timer ID
+                        if (count > 0) {
+                            count--;
+                            timer.innerHTML = "Halaman ini akan diarahkan menuju Home " + count + " detik. "; // Timer Message
+                            setTimeout("countDown()", 1000);
+                        } else {
+                            window.location.href = redirect;
+                        }
+                    }
+                    countDown();
+                </script>
             @endif
 
             <form action="{{ url('/prd-post') }}" method="POST" class="create-prd">
