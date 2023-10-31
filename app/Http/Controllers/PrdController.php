@@ -97,13 +97,15 @@ class PrdController extends Controller
 
         $mailData = [
             'title' => 'Info Dokumen PRD',
-            'url' => url('/prd-detail'),
+            'url' => url('prd-detail/' . $company->company_code),
+
+            // 'url' => url('/prd-detail/{{ $company->code }}'),
         ];
 
         // Mail::to('bernitafebri@gmail.com')->send(new CompanyPRDMail($mailData));
         Mail::to($company->cp_email)->cc('bernitafebri@gmail.com')->send(new CompanyPRDMail($mailData));
 
-        return back()->with('success', 'PRD Berhasil Disimpan.');
+        return back()->with('success', 'PRD Berhasil Disimpan. ');
     }
 
     /**

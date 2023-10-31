@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Models\Prd;
 
 class CompanyController extends Controller
 {
@@ -32,9 +33,16 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Company $company)
+    public function show($company)
     {
-        //
+        $companyID = Company::where('company_code', $company)->get();
+        return view(
+            'company.detail',
+            [
+                'company'   =>  Company::where('id', $companyID[0]->id)->with('prd', 'detailprd', 'fitur', 'target')->get(),
+                'prd'   =>  Prd::where('company_id', $companyID[0]->id)->with('company', 'detailprd', 'fitur', 'target')->get(),
+            ]
+        );
     }
 
     /**

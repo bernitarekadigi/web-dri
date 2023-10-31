@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PrdController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -25,10 +26,10 @@ Route::group(['middleware' => ['setLocale']], function () {
         return view('company.index');
     });
 
-    // Route::get('/prd', [CompanyController::class, 'formPrd']);
-    Route::get('/prd-detail', [PrdController::class, 'show']);
+    Route::get('prd-detail/{company}', [CompanyController::class, 'show']);
+    // Route::get('/prd-detail', [PrdController::class, 'show']);
     Route::post('/prd-post', [PrdController::class, 'store']);
-    Route::get('/send-mail', [PrdController::class, 'sendEmail']);
+    // Route::get('/send-mail', [PrdController::class, 'sendEmail']);
 });
 
 Route::get('{locale}/', function ($local) {
